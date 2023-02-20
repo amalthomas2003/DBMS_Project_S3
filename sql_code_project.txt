@@ -1,0 +1,47 @@
+CREATE DATABASE library;
+
+USE library;
+
+CREATE TABLE books (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    published_year INT NOT NULL,
+    available BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+CREATE TABLE members (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE loans (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    book_id INT NOT NULL,
+    member_id INT NOT NULL,
+    start_date DATE NOT NULL,
+    due_date DATE NOT NULL,
+    returned BOOLEAN NOT NULL DEFAULT FALSE,
+    FOREIGN KEY (book_id) REFERENCES books(id),
+    FOREIGN KEY (member_id) REFERENCES members(id)
+);
+
+
+
+USE library;
+
+INSERT INTO books (title, author, published_year, available) VALUES
+("The Hobbit", "J.R.R. Tolkien", 1937, 4),
+("To the Lighthouse", "Virginia Woolf", 1927, 2),
+("A Passage to India", "E.M. Forster", 1924, 8),
+("The Sun Also Rises", "Ernest Hemingway", 1926, 3),
+("Slaughterhouse-Five", "Kurt Vonnegut", 1969, 1),
+("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", 1979, 1),
+("One Hundred Years of Solitude", "Gabriel Garcia Marquez", 1967, 1),
+("Beloved", "Toni Morrison", 1987, 6),
+("The Color Purple", "Alice Walker", 1982, 11),
+("The Bluest Eye", "Toni Morrison", 1970, 5),
+("Their Eyes Were Watching God", "Zora Neale Hurston", 1937, 9),
+("The Joy Luck Club", "Amy Tan", 1989, 10);
